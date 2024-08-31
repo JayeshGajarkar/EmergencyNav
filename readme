@@ -1,55 +1,65 @@
-# Kolhapur
+# Kolhapur Safety Route Suggestion App
 
-The issue of safety is of crucial importance in Kolhapur with escalating crime rates. Utilizing crime-related data effectively,
-we've developed an app that suggests alternative routes between any two places in Kolhapur, providing information not only about time duration and distance but 
-also a 'Danger Index' for each route.
+This project addresses the crucial issue of safety in Kolhapur, where escalating crime rates are a significant concern. Our app suggests alternative routes between any two places in Kolhapur, providing information on time duration, distance, and a 'Danger Index' for each route.
 
-## Technical Complexity:
+## Technical Overview
 
-We applied an Unsupervised Machine Learning Algorithm to determine the danger index of multiple routes between two places.
+### Unsupervised Machine Learning
 
-We utilized a Clustering algorithm: K-Means, to rate criminal activities in 157 places on the map of Kolhapur on a scale of 0 to 4. K-means clustering is employed in
-unsupervised machine learning for unlabeled data, aiming to find groups in the data with the number of groups represented by the variable K. The algorithm assigns each 
-data point to one of K clusters iteratively based on feature similarity. The results include centroids of K clusters and labels for the training data.
+We implemented an Unsupervised Machine Learning Algorithm to determine the Danger Index of multiple routes. The K-Means Clustering algorithm is employed to rate criminal activities in 157 places on the map of Kolhapur, on a scale of 0 to 4. 
 
-To preprocess the data for machine learning, we scaled the values using the following formula:
+- **K-Means Clustering**: 
+  - Groups data points based on feature similarity.
+  - Iteratively assigns each data point to one of K clusters.
+  - The outcome includes centroids of K clusters and labels for the training data.
 
-\[
-\text{Scaled Values} = \left(\text{Sum Values} - \text{Min Value}\right) \times \frac{\text{New Max} - \text{New Min}}{\text{Max Value} - \text{Min Value}} + \text{New Min}
-\]
+### Data Preprocessing
 
-This formula transforms the original values (Sum Values) from their current range (Min Value to Max Value) to a new range (New Min to New Max). This scaling is crucial
-for preparing data for machine learning algorithms.
+To prepare the data for machine learning, we scaled the values using the following formula:
 
-The 'Danger Index' for a given path is calculated using the following formula:
+```text
+Scaled Values = (Sum Values - Min Value) × (New Max - New Min) / (Max Value - Min Value) + New Min
+```
 
-\[
-\text{Danger Index} = \frac{\sum_{i=1}^{N} \text{Magnitude}_i}{\text{Count of Occurrences}}
-\]
+This formula transforms the original values into a new range, making them suitable for the machine learning algorithm.
 
-Here's a simplified explanation of the components:
-1. Magnitude: This represents the severity of each crime occurrence along the path. It’s summed up for all occurrences (from 1 to N).
-2. Count of occurrences: This is the total number of crime occurrences along the path.
-3. Danger Index: This is calculated by dividing the sum of the magnitudes by the count of occurrences. It gives an average measure of the ‘danger’ for
-   the path based on the crime data.
+### Danger Index Calculation
 
-## APIs - Google Maps JavaScript API:
+The 'Danger Index' for a given path is calculated as follows:
 
-We employed Google Maps and Google Places APIs to display all possible routes between any two locations, along with their associated danger index. An autocomplete feature in
-the search bars enables users to select starting and destination locations, along with the mode of travel (e.g., walking, driving, or transit). This displays routes with 
-markers indicating the danger level of places along those routes. The displayed data below the map includes relevant information such as time durations, distances, and danger 
-indexes of all possible routes between the entered places, enabling users to make informed decisions while selecting a route.
+```text
+Danger Index = Sum of Magnitudes / Count of Occurrences
+```
 
-## Result of Training the Model:
+Where:
+- **Magnitude**: Severity of each crime occurrence along the path.
+- **Count of Occurrences**: Total number of crime occurrences along the path.
 
-The K-means algorithm assigns values from 0 to 4 to 157 locations in Kolhapur. An index of 0 indicates relatively low crime rates in the past, while an index of 4
-indicates high crime records. Various legends are used to display the safety index of different locations in Kolhapur:
+This calculation provides an average measure of the 'danger' for a path based on crime data.
 
-### Legend:
-- Green Ticks: Safest
-- Smiley: Moderately Safe
-- Exclamation Mark: Be Careful
-- Skull: Moderately Dangerous
-- Cross: Extremely Dangerous
+## APIs - Google Maps JavaScript API
 
-This comprehensive approach provides users with valuable insights into the safety levels of various routes in Kolhapur, empowering them to make safer travel choices.
+We utilized the Google Maps and Google Places APIs to display possible routes between two locations, along with their associated Danger Index. Features include:
+
+- **Autocomplete Search Bars**: Users can select starting and destination locations, and choose the mode of travel (walking, driving, or transit).
+- **Route Information**: Displays time duration, distance, and Danger Index for each route.
+- **Markers**: Indicates the danger level of places along the routes.
+
+## Model Training Results
+
+The K-Means algorithm assigns values from 0 to 4 to 157 locations in Kolhapur:
+
+- **0**: Low crime rate (Safest)
+- **4**: High crime rate (Most Dangerous)
+
+### Legend
+
+- 🟢 **Green Tick**: Safest
+- 🙂 **Smiley**: Moderately Safe
+- ❗ **Exclamation Mark**: Be Careful
+- ☠️ **Skull**: Moderately Dangerous
+- ❌ **Cross**: Extremely Dangerous
+
+## Conclusion
+
+This app provides users with valuable insights into the safety levels of various routes in Kolhapur, empowering them to make safer travel choices.
