@@ -53,7 +53,6 @@ The K-Means algorithm assigns values from 0 to 4 to 157 locations in Kolhapur:
 - **4**: High crime rate (Most Dangerous)
 
 ### Legend
-
 - 🟢 **Green Tick**: Safest
 - 🙂 **Smiley**: Moderately Safe
 - ❗ **Exclamation Mark**: Be Careful
